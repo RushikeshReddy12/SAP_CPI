@@ -19,11 +19,11 @@ jobs:
       - name: Sync iFlow from CPI to Git
         uses: engswee/flashpipe-action/sync@v1
         with:
-          tenantUrl: ${{ secrets.TENANT_URL }}
-          clientId: ${{ secrets.CLIENT_ID }}
-          clientSecret: ${{ secrets.CLIENT_SECRET }}
-          tokenUrl: ${{ secrets.TOKEN_URL }}
-          packageId: ${{ github.event.inputs.packageId }}
+          tmn-host: ${{ secrets.TMN_HOST }}
+          oauth-host: ${{ secrets.OAUTH_HOST }}
+          oauth-clientid: ${{ secrets.CLIENT_ID }}
+          oauth-clientsecret: ${{ secrets.CLIENT_SECRET }}
+          package-id: ${{ github.event.inputs.packageId }}
 
       - name: Commit and push changes
         run: |
