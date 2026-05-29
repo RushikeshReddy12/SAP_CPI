@@ -1,34 +1,50 @@
-name: Sync iFlows to GitHub
+name: Sync All CPI iFlows to GitHub
 
 on:
   workflow_dispatch:
-    inputs:
-      packageId:
-        description: 'SAP CPI Package ID'
-        required: true
+
+  schedule:
+    - cron: '0 */6 * * *'   # Every 6 hours
+
+permissions:
+  contents: write
 
 jobs:
   sync_iflows:
     runs-on: ubuntu-latest
+
     container:
       image: engswee/flashpipe:latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Sync iFlow from CPI to Git
+      - name: Sync all iFlows from SAP CPI
         uses: engswee/flashpipe-action/sync@v1
         with:
           tmn-host: ${{ secrets.TMN_HOST }}
           oauth-host: ${{ secrets.OAUTH_HOST }}
           oauth-clientid: ${{ secrets.CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.CLIENT_SECRET }}
-          package-id: ${{ github.event.inputs.packageId }}
+
+          # Fetch ALL packages and iFlows
+          package-id: '*'
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git add -A
-          git diff --quiet && git diff --staged --quiet || git commit -m "Sync iFlow: ${{ github.event.inputs.packageId }}"
+
+          if git diff --cached --quiet; then
+            echo "No changes detected"
+            exit 0
+          fi
+
+          git commit -m "Sync all CPI iFlows"
+
           git push
