@@ -1,45 +1,32 @@
-name: Sync IFlows from CPI to GitHub
+name: Sync iFlows to GitHub
 
 on:
   workflow_dispatch:
     inputs:
       packageId:
-        description: 'CPI Integration Package ID'
+        description: 'SAP CPI Package ID'
         required: true
-        type: string
 
 jobs:
-  sync:
+  sync_iflows:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Sync iFlow from CPI to Git
+        uses: engswee/flashpipe-action/sync@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          tenantUrl: ${{ secrets.TENANT_URL }}
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          tokenUrl: ${{ secrets.TOKEN_URL }}
+          packageId: ${{ github.event.inputs.packageId }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Export iFlows from CPI
-        env:
-          CPI_USER: ${{ secrets.DEV_USER_ID }}
-          CPI_PASSWORD: ${{ secrets.DEV_PASSWORD }}
-          CPI_HOST: '454bb488trial.integrationsuite-trial01.cfapps.us10-001.hana.ondemand.com'
-          PACKAGE_ID: ${{ github.event.inputs.packageId }}
-        run: python export-iflows.py
-
-      - name: Configure Git
+      - name: Commit and push changes
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-
-      - name: Commit and Push to GitHub
-        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --staged --quiet || git commit -m "Sync iFlows from CPI: ${{ github.event.inputs.packageId }} [skip ci]"
+          git diff --quiet && git diff --staged --quiet || git commit -m "Sync iFlow: ${{ github.event.inputs.packageId }}"
           git push
