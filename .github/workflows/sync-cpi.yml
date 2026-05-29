@@ -1,0 +1,32 @@
+name: Sync iFlows to GitHub
+
+on:
+  workflow_dispatch:
+    inputs:
+      packageId:
+        description: 'SAP CPI Package ID'
+        required: true
+
+jobs:
+  sync_iflows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync iFlow from CPI to Git
+        uses: engswee/flashpipe-action/sync@v1
+        with:
+          tenantUrl: ${{ secrets.TENANT_URL }}
+          clientId: ${{ secrets.CLIENT_ID }}
+          clientSecret: ${{ secrets.CLIENT_SECRET }}
+          tokenUrl: ${{ secrets.TOKEN_URL }}
+          packageId: ${{ github.event.inputs.packageId }}
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Sync iFlow: ${{ github.event.inputs.packageId }}"
+          git push
