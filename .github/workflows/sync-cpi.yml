@@ -1,25 +1,25 @@
 name: Snapshot SAP Integration Suite to GitHub
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'  # optional: nightly sync
+    - cron: '0 2 * * *'  # optional nightly sync
 
 jobs:
   snapshot:
     runs-on: ubuntu-latest
     container:
-      image: engswee/flashpipe:latest  # Docker image uses 'latest' — this is fine
+      image: engswee/flashpipe:latest   # ← THIS was missing — action requires it
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Snapshot tenant iFlows to GitHub
-        uses: engswee/flashpipe-action/snapshot@v1  # ✅ correct — sub-action + @v1
+      - name: Snapshot all iFlows to GitHub
+        uses: engswee/flashpipe-action/snapshot@v1
         with:
           tmn-host: ${{ vars.TMN_HOST }}
           oauth-host: ${{ vars.OAUTH_HOST }}
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          # Optional: filter specific packages (comma-separated IDs)
-          # ids-include: "Package1,Package2"
+          # ids-include: "PackageA,PackageB"  # optional: limit to specific packages
+          # ids-exclude: "PackageX"           # optional: exclude specific packages
