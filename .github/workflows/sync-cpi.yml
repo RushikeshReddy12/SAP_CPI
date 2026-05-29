@@ -10,6 +10,8 @@ on:
 jobs:
   sync_iflows:
     runs-on: ubuntu-latest
+    container:
+      image: engswee/flashpipe:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
