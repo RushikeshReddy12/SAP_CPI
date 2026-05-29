@@ -1,64 +1,25 @@
-name: Sync All SAP CPI iFlows
+name: Sync iFlows to GitHub
 
 on:
-workflow_dispatch:
-
-permissions:
-contents: write
+  workflow_dispatch:
+    inputs:
+      package_id:
+        description: 'Integration Package ID'
+        required: true
+  schedule:
+    - cron: '0 2 * * *'  # nightly sync
 
 jobs:
-sync:
-runs-on: ubuntu-latest
-
-```
-container:
-  image: engswee/flashpipe:latest
-
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
-
-  - name: Get all package IDs
-    id: packages
-    run: |
-      TOKEN=$(curl -s --request POST \
-        --url "https://${{ secrets.OAUTH_HOST }}/oauth/token?grant_type=client_credentials" \
-        --user "${{ secrets.CLIENT_ID }}:${{ secrets.CLIENT_SECRET }}" \
-        | jq -r .access_token)
-
-      curl -s \
-        --url "https://${{ secrets.TMN_HOST }}/api/v1/IntegrationPackages" \
-        --header "Authorization: Bearer $TOKEN" \
-        | jq -r '.d.results[].Id' > packages.txt
-
-      cat packages.txt
-
-  - name: Sync all packages
-    run: |
-      while read package; do
-        echo "Syncing package: $package"
-
-        flashpipe sync \
-          --tmn-host "${{ secrets.TMN_HOST }}" \
-          --oauth-host "${{ secrets.OAUTH_HOST }}" \
-          --oauth-clientid "${{ secrets.CLIENT_ID }}" \
-          --oauth-clientsecret "${{ secrets.CLIENT_SECRET }}" \
-          --package-id "$package"
-      done < packages.txt
-
-  - name: Commit and push
-    run: |
-      git config --global user.name "github-actions[bot]"
-      git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      git add -A
-
-      if git diff --cached --quiet; then
-        echo "No changes detected"
-        exit 0
-      fi
-
-      git commit -m "Sync all SAP CPI iFlows"
-
-      git push
-```
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Sync iFlows
+        uses: engswee/flashpipe-action@latest
+        with:
+          tmn-host: ${{ secrets.CPI_HOST }}
+          oauth-host: ${{ secrets.OAUTH_HOST }}
+          oauth-clientid: ${{ secrets.OAUTH_CLIENT_ID }}
+          oauth-clientsecret: ${{ secrets.OAUTH_CLIENT_SECRET }}
+          package-id: ${{ github.event.inputs.package_id }}
+          git-src-dir: iflows/
