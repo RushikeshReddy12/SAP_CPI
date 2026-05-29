@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Employees" minOccurs="1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Employee">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="1" name="DivisionID" type="xs:string" />
+              <xs:element minOccurs="1" name="SSN" type="xs:unsignedInt" />
+              <xs:element minOccurs="1" name="FirstName" type="xs:string" />
+              <xs:element minOccurs="0" name="MiddleName" />
+              <xs:element minOccurs="1" name="LastName" type="xs:string" />
+              <xs:element minOccurs="1" name="Email" type="xs:string" />
+              <xs:element minOccurs="1" name="Address1" type="xs:string" />
+              <xs:element minOccurs="1" name="Address2" type="xs:string" />
+              <xs:element minOccurs="1" name="City" type="xs:string" />
+              <xs:element minOccurs="1" name="State" type="xs:string" />
+              <xs:element minOccurs="1" name="Zip" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="Phone" type="xs:unsignedLong" />
+              <xs:element minOccurs="0" name="DOB" />
+              <xs:element minOccurs="1" name="LocationCode" type="xs:string" />
+              <xs:element minOccurs="1" name="PositionCode" type="xs:string" />
+              <xs:element minOccurs="1" name="WorkState" type="xs:string" />
+              <xs:element minOccurs="1" name="LoginID" />
+              <xs:element minOccurs="1" name="Password" />
+              <xs:element minOccurs="1" name="Activate" type="xs:string" />
+              <xs:element minOccurs="1" name="TemplateCode" type="xs:string" />
+              <xs:element minOccurs="1" name="SkipSMSAlert" />
+              <xs:element minOccurs="1" name="EMPLOYERNAME" type="xs:string" />
+              <xs:element minOccurs="0" name="EMPLOYERDBA" type="xs:string" />
+              <xs:element minOccurs="1" name="EMPLOYERADDRESS1" />
+              <xs:element minOccurs="0" name="EMPLOYERADDRESS2" />
+              <xs:element minOccurs="1" name="EMPLOYERCITY" />
+              <xs:element minOccurs="1" name="EMPLOYERSTATE" />
+              <xs:element minOccurs="1" name="EMPLOYERZIP" />
+              <xs:element minOccurs="1" name="AREACODE" />
+              <xs:element minOccurs="1" name="EMPLOYERPHONE" />
+              <xs:element minOccurs="1" name="EmployerEmail" />
+              <xs:element minOccurs="0" name="EMPLOYERFAX" />
+              <xs:element minOccurs="1" name="EMPLOYERSIGNATURE" />
+              <xs:element minOccurs="1" name="FEIN" />
+              <xs:element minOccurs="0" name="CALeaveStartDate" type="xs:unsignedInt" />
+              <xs:element minOccurs="0" name="CALaidOffDischargeDate" />
+              <xs:element minOccurs="0" name="CAEmploymentStatusChangeDate" type="xs:string" />
+              <xs:element minOccurs="1" name="CAStatusChangedTo" />
+              <xs:element minOccurs="1" name="EMPLOYERREGNUMBER" />
+              <xs:element minOccurs="0" name="CTNCCICode" type="xs:string" />
+              <xs:element minOccurs="1" name="CTStartDate" />
+              <xs:element minOccurs="1" name="CTLastDayWorked" type="xs:string" />
+              <xs:element minOccurs="0" name="CTReturnToWorkDate" type="xs:string" />
+              <xs:element minOccurs="1" name="CTYTDEarnings" />
+              <xs:element minOccurs="0" name="CTLastWeekWage" type="xs:string" />
+              <xs:element minOccurs="1" name="CTLackOfWork" />
+              <xs:element minOccurs="1" name="CTVoluntaryLeaving" type="xs:string" />
+              <xs:element minOccurs="1" name="CTDischargeOrSuspension" type="xs:string" />
+              <xs:element minOccurs="1" name="CTLeaveOfAbsence" type="xs:string" />
+              <xs:element minOccurs="1" name="CTOther" type="xs:string" />
+              <xs:element minOccurs="1" name="CTOtherReason" type="xs:string" />
+              <xs:element minOccurs="1" name="CTDismissalPayYes" />
+              <xs:element minOccurs="1" name="CTDismissalPayNo" type="xs:string" />
+              <xs:element minOccurs="1" name="CTDismissalPayType" type="xs:string" />
+              <xs:element minOccurs="1" name="CTDismissalPayHrsOrDay" />
+              <xs:element minOccurs="1" name="CTDismissalPayAmount" />
+              <xs:element minOccurs="1" name="CTDismissalPayDatesCovered" />
+              <xs:element minOccurs="0" name="GAOtherNames" />
+              <xs:element minOccurs="1" name="GALastEmploymentFrom" />
+              <xs:element minOccurs="1" name="GALastEmploymentTo" type="xs:string" />
+              <xs:element minOccurs="1" name="GALackOfWork" type="xs:string" />
+              <xs:element minOccurs="1" name="GAOther" type="xs:string" />
+              <xs:element minOccurs="1" name="GAOtherReason" type="xs:string" />
+              <xs:element minOccurs="0" name="GAPaymentType" />
+              <xs:element minOccurs="1" name="GAAmount" />
+              <xs:element minOccurs="1" name="GAPaymentPeriodFrom" />
+              <xs:element minOccurs="1" name="GAPaymentPeriodTo" />
+              <xs:element minOccurs="1" name="GAPaymentIssueDate" />
+              <xs:element minOccurs="0" name="GARetirementAmount" />
+              <xs:element minOccurs="0" name="GAContributionPercentage" />
+              <xs:element minOccurs="1" name="GAEarningYes" />
+              <xs:element minOccurs="1" name="GAEarningNo" type="xs:string" />
+              <xs:element minOccurs="1" name="GAEarnedAmount" type="xs:string" />
+              <xs:element minOccurs="1" name="GAAvgWeeklyWage" type="xs:string" />
+              <xs:element minOccurs="1" name="GADOLACCOUNTNumber" type="xs:string" />
+              <xs:element minOccurs="1" name="EMPEAN" type="xs:string" />
+              <xs:element minOccurs="1" name="CONTACTPERSON" />
+              <xs:element minOccurs="1" name="MISeparationReason" />
+              <xs:element minOccurs="1" name="EMPIDNUMBER" />
+              <xs:element minOccurs="0" name="NJWorkLocation" />
+              <xs:element minOccurs="1" name="NJSeparationDate" />
+              <xs:element minOccurs="1" name="NJPermanent" />
+              <xs:element minOccurs="1" name="NJTemporary" />
+              <xs:element minOccurs="1" name="NJExpectedRecallDate" />
+              <xs:element minOccurs="1" name="EMPLOYERREGISTRATION" />
+              <xs:element minOccurs="1" name="NYDateGiven" />
+              <xs:element minOccurs="0" name="PAYROLL" />
+              <xs:element minOccurs="0" name="PAYROLLCLOCKNUMBER" />
+              <xs:element minOccurs="0" name="LOCATIONOFEMPCODE" />
+              <xs:element minOccurs="1" name="EMPLOYERPAUCACCTNO" />
+              <xs:element minOccurs="1" name="EMPLOYERCONTACTPERSON" />
+              <xs:element minOccurs="1" name="EMPLOYERTITLE" />
+              <xs:element minOccurs="0" name="PAReturnToWorkYes" />
+              <xs:element minOccurs="0" name="PAReturnToWorkNo" type="xs:string" />
+              <xs:element minOccurs="0" name="PAExpectedRecallDate" type="xs:string" />
+              <xs:element minOccurs="1" name="EMPACCOUNTNUMBER" />
+              <xs:element minOccurs="1" name="TNLastEmployedFrom" />
+              <xs:element minOccurs="1" name="TNLastEmployedTo" />
+              <xs:element minOccurs="1" name="TNOccupation" />
+              <xs:element minOccurs="1" name="TNWorkLocation" />
+              <xs:element minOccurs="1" name="TNLackOfWork" />
+              <xs:element minOccurs="1" name="TNDischarge" />
+              <xs:element minOccurs="1" name="TNQuit" />
+              <xs:element minOccurs="1" name="TNOtherSeparationReason" />
+              <xs:element minOccurs="1" name="TNPermanentLayoff" />
+              <xs:element minOccurs="1" name="TNTemporaryLayoff" />
+              <xs:element minOccurs="1" name="TNRecallDate" />
+              <xs:element minOccurs="1" name="TNVacationPayAmount" />
+              <xs:element minOccurs="1" name="TNVacationPayEndDate" />
+              <xs:element minOccurs="0" name="TNLieuNoticeWage" />
+              <xs:element minOccurs="0" name="TNSeverance" />
+              <xs:element minOccurs="1" name="TNSeveranceAmount" />
+              <xs:element minOccurs="1" name="TNSeverancePayFromDate" />
+              <xs:element minOccurs="1" name="TNSeverancePayToDate" />
+              <xs:element minOccurs="0" name="TNReleaseDate" />
+              <xs:element minOccurs="1" name="IAACCOUNTNUMBER" />
+              <xs:element minOccurs="0" name="EMPNAME" />
+              <xs:element minOccurs="0" name="EMPTITLE" />
+              <xs:element minOccurs="1" name="IADateOfSeparation" />
+              <xs:element minOccurs="0" name="IALocationcode" />
+              <xs:element minOccurs="1" name="IAVoluntaryQuit" />
+              <xs:element minOccurs="1" name="IADischarge" />
+              <xs:element minOccurs="1" name="IARefused" />
+              <xs:element minOccurs="1" name="IALeft" />
+              <xs:element minOccurs="1" name="COStartDate" />
+              <xs:element minOccurs="1" name="COLastDayWorked" />
+              <xs:element minOccurs="1" name="COYTDEarnings" />
+              <xs:element minOccurs="1" name="COLastWeekWage" />
+              <xs:element minOccurs="1" name="COQuit" />
+              <xs:element minOccurs="1" name="COQuitReason" />
+              <xs:element minOccurs="1" name="COLayoff" />
+              <xs:element minOccurs="1" name="CODischarge" />
+              <xs:element minOccurs="1" name="CODischargeReason" />
+              <xs:element minOccurs="1" name="COOther" />
+              <xs:element minOccurs="1" name="COOTHERREASON" />
+              <xs:element minOccurs="1" name="MONTHLY" />
+              <xs:element minOccurs="1" name="SEMIMONTHLY" />
+              <xs:element minOccurs="1" name="WEEKLY" />
+              <xs:element minOccurs="1" name="OTHER" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

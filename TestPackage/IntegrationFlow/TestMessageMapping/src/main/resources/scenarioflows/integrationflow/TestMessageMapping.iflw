@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ifl="http:///com.sap.ifl.model/Ifl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1">
+    <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
+        <bpmn2:extensionElements>
+            <ifl:property>
+                <key>namespaceMapping</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>httpSessionHandling</key>
+                <value>None</value>
+            </ifl:property>
+            <ifl:property>
+                <key>accessControlMaxAge</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>returnExceptionToSender</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>log</key>
+                <value>All events</value>
+            </ifl:property>
+            <ifl:property>
+                <key>corsEnabled</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>exposedHeaders</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>componentVersion</key>
+                <value>1.2</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedHeaderList</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>ServerTrace</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedOrigins</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>accessControlAllowCredentials</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedHeaders</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedMethods</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>cmdVariantUri</key>
+                <value>ctype::IFlowVariant/cname::IFlowConfiguration/version::1.2.4</value>
+            </ifl:property>
+        </bpmn2:extensionElements>
+        <bpmn2:participant id="Participant_1" ifl:type="EndpointSender" name="Sender">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>enableBasicAuthentication</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>ifl:type</key>
+                    <value>EndpointSender</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+        </bpmn2:participant>
+        <bpmn2:participant id="Participant_2" ifl:type="EndpointRecevier" name="Receiver">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>ifl:type</key>
+                    <value>EndpointRecevier</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+        </bpmn2:participant>
+        <bpmn2:participant id="Participant_Process_1" ifl:type="IntegrationProcess" name="Integration Process" processRef="Process_1">
+            <bpmn2:extensionElements/>
+        </bpmn2:participant>
+    </bpmn2:collaboration>
+    <bpmn2:process id="Process_1" name="Integration Process">
+        <bpmn2:extensionElements>
+            <ifl:property>
+                <key>transactionTimeout</key>
+                <value>30</value>
+            </ifl:property>
+            <ifl:property>
+                <key>componentVersion</key>
+                <value>1.2</value>
+            </ifl:property>
+            <ifl:property>
+                <key>cmdVariantUri</key>
+                <value>ctype::FlowElementVariant/cname::IntegrationProcess/version::1.2.1</value>
+            </ifl:property>
+            <ifl:property>
+                <key>transactionalHandling</key>
+                <value>Not Required</value>
+            </ifl:property>
+        </bpmn2:extensionElements>
+        <bpmn2:endEvent id="EndEvent_2" name="End">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::MessageEndEvent/version::1.1.0</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+            <bpmn2:messageEventDefinition/>
+        </bpmn2:endEvent>
+        <bpmn2:callActivity id="CallActivity_4" name="Content Modifier 1">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>bodyType</key>
+                    <value>constant</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>propertyTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>headerTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>wrapContent</key>
+                    <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Students&gt;
+    &lt;Student&gt;
+        &lt;StudentId&gt;S001&lt;/StudentId&gt;
+        &lt;PersonalDetails&gt;
+            &lt;FirstName&gt;Rahul&lt;/FirstName&gt;
+            &lt;LastName&gt;Sharma&lt;/LastName&gt;
+            &lt;Gender&gt;Male&lt;/Gender&gt;
+            &lt;DOB&gt;2001-05-14&lt;/DOB&gt;
+        &lt;/PersonalDetails&gt;
+        &lt;Contact&gt;
+            &lt;Email&gt;rahul.sharma@example.com&lt;/Email&gt;
+            &lt;Phone&gt;
+                &lt;CountryCode&gt;91&lt;/CountryCode&gt;
+                &lt;Number&gt;9876543210&lt;/Number&gt;
+            &lt;/Phone&gt;
+        &lt;/Contact&gt;
+        &lt;Address&gt;
+            &lt;City&gt;Hyderabad&lt;/City&gt;
+            &lt;State&gt;Telangana&lt;/State&gt;
+            &lt;Country&gt;India&lt;/Country&gt;
+            &lt;PinCode&gt;500081&lt;/PinCode&gt;
+        &lt;/Address&gt;
+        &lt;AcademicInfo&gt;
+            &lt;Department&gt;Computer Science&lt;/Department&gt;
+            &lt;AdmissionDate&gt;2019-06-10&lt;/AdmissionDate&gt;
+            &lt;GPA&gt;8.5&lt;/GPA&gt;
+        &lt;/AcademicInfo&gt;
+    &lt;/Student&gt;
+    &lt;Student&gt;
+        &lt;StudentId&gt;S002&lt;/StudentId&gt;
+        &lt;PersonalDetails&gt;
+            &lt;FirstName&gt;Anjali&lt;/FirstName&gt;
+            &lt;LastName&gt;Reddy&lt;/LastName&gt;
+            &lt;Gender&gt;Female&lt;/Gender&gt;
+            &lt;DOB&gt;2000-11-22&lt;/DOB&gt;
+        &lt;/PersonalDetails&gt;
+        &lt;Contact&gt;
+            &lt;Email&gt;anjali.reddy@example.com&lt;/Email&gt;
+            &lt;Phone&gt;
+                &lt;CountryCode&gt;91&lt;/CountryCode&gt;
+                &lt;Number&gt;9123456780&lt;/Number&gt;
+            &lt;/Phone&gt;
+        &lt;/Contact&gt;
+        &lt;Address&gt;
+            &lt;City&gt;Bangalore&lt;/City&gt;
+            &lt;State&gt;Karnataka&lt;/State&gt;
+            &lt;Country&gt;Korea&lt;/Country&gt;
+            &lt;PinCode&gt;560001&lt;/PinCode&gt;
+        &lt;/Address&gt;
+        &lt;AcademicInfo&gt;
+            &lt;Department&gt;Electronics&lt;/Department&gt;
+            &lt;AdmissionDate&gt;2018-07-01&lt;/AdmissionDate&gt;
+            &lt;GPA&gt;8.9&lt;/GPA&gt;
+        &lt;/AcademicInfo&gt;
+    &lt;/Student&gt;
+    &lt;Student&gt;
+        &lt;StudentId&gt;S003&lt;/StudentId&gt;
+        &lt;PersonalDetails&gt;
+            &lt;FirstName&gt;Vikram&lt;/FirstName&gt;
+            &lt;LastName&gt;Singh&lt;/LastName&gt;
+            &lt;Gender&gt;Male&lt;/Gender&gt;
+            &lt;DOB&gt;2002-02-10&lt;/DOB&gt;
+        &lt;/PersonalDetails&gt;
+        &lt;Contact&gt;
+            &lt;Email&gt;vikram.singh@example.com&lt;/Email&gt;
+            &lt;Phone&gt;
+                &lt;CountryCode&gt;91&lt;/CountryCode&gt;
+                &lt;Number&gt;9988776655&lt;/Number&gt;
+            &lt;/Phone&gt;
+        &lt;/Contact&gt;
+        &lt;Address&gt;
+            &lt;City&gt;Chennai&lt;/City&gt;
+            &lt;State&gt;Tamil Nadu&lt;/State&gt;
+            &lt;Country&gt;United States&lt;/Country&gt;
+            &lt;PinCode&gt;600001&lt;/PinCode&gt;
+        &lt;/Address&gt;
+        &lt;AcademicInfo&gt;
+            &lt;Department&gt;Mechanical&lt;/Department&gt;
+            &lt;AdmissionDate&gt;2020-08-15&lt;/AdmissionDate&gt;
+            &lt;GPA&gt;7.8&lt;/GPA&gt;
+        &lt;/AcademicInfo&gt;
+    &lt;/Student&gt;
+    &lt;Student&gt;
+        &lt;StudentId&gt;S004&lt;/StudentId&gt;
+        &lt;PersonalDetails&gt;
+            &lt;FirstName&gt;Priya&lt;/FirstName&gt;
+            &lt;LastName&gt;Iyer&lt;/LastName&gt;
+            &lt;Gender&gt;Female&lt;/Gender&gt;
+            &lt;DOB&gt;2001-09-30&lt;/DOB&gt;
+        &lt;/PersonalDetails&gt;
+        &lt;Contact&gt;
+            &lt;Email&gt;priya.iyer@example.com&lt;/Email&gt;
+            &lt;Phone&gt;
+                &lt;CountryCode&gt;91&lt;/CountryCode&gt;
+                &lt;Number&gt;9090909090&lt;/Number&gt;
+            &lt;/Phone&gt;
+        &lt;/Contact&gt;
+        &lt;Address&gt;
+            &lt;City&gt;Mumbai&lt;/City&gt;
+            &lt;State&gt;Maharashtra&lt;/State&gt;
+            &lt;Country&gt;India&lt;/Country&gt;
+            &lt;PinCode&gt;400001&lt;/PinCode&gt;
+        &lt;/Address&gt;
+        &lt;AcademicInfo&gt;
+            &lt;Department&gt;Civil&lt;/Department&gt;
+            &lt;AdmissionDate&gt;2019-06-20&lt;/AdmissionDate&gt;
+            &lt;GPA&gt;8.2&lt;/GPA&gt;
+        &lt;/AcademicInfo&gt;
+    &lt;/Student&gt;
+    &lt;Student&gt;
+        &lt;StudentId&gt;S005&lt;/StudentId&gt;
+        &lt;PersonalDetails&gt;
+            &lt;FirstName&gt;Arjun&lt;/FirstName&gt;
+            &lt;LastName&gt;Verma&lt;/LastName&gt;
+            &lt;Gender&gt;Male&lt;/Gender&gt;
+            &lt;DOB&gt;2000-03-18&lt;/DOB&gt;
+        &lt;/PersonalDetails&gt;
+        &lt;Contact&gt;
+            &lt;Email&gt;arjun.verma@example.com&lt;/Email&gt;
+            &lt;Phone&gt;
+                &lt;CountryCode&gt;91&lt;/CountryCode&gt;
+                &lt;Number&gt;9812345678&lt;/Number&gt;
+            &lt;/Phone&gt;
+        &lt;/Contact&gt;
+        &lt;Address&gt;
+            &lt;City&gt;Delhi&lt;/City&gt;
+            &lt;State&gt;Delhi&lt;/State&gt;
+            &lt;Country&gt;United States&lt;/Country&gt;
+            &lt;PinCode&gt;110001&lt;/PinCode&gt;
+        &lt;/Address&gt;
+        &lt;AcademicInfo&gt;
+            &lt;Department&gt;Information Technology&lt;/Department&gt;
+            &lt;AdmissionDate&gt;2018-07-15&lt;/AdmissionDate&gt;
+            &lt;GPA&gt;9.1&lt;/GPA&gt;
+        &lt;/AcademicInfo&gt;
+    &lt;/Student&gt;
+&lt;/Students&gt;</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.6</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>activityType</key>
+                    <value>Enricher</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::Enricher/version::1.6.3</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
+            <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+        </bpmn2:callActivity>
+        <bpmn2:startEvent id="StartEvent_12" name="Start Timer 1">
+            <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
+            <bpmn2:timerEventDefinition id="TimerEventDefinition_67029">
+                <bpmn2:extensionElements>
+                    <ifl:property>
+                        <key>scheduleKey</key>
+                        <value>&lt;row&gt;&lt;cell&gt;dateType&lt;/cell&gt;&lt;cell&gt;SIMPLE&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;hourValue&lt;/cell&gt;&lt;cell&gt;18&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;minutesValue&lt;/cell&gt;&lt;cell&gt;49&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;timeType&lt;/cell&gt;&lt;cell&gt;ON_TIME&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;timeZone&lt;/cell&gt;&lt;cell&gt;( UTC 0:00 ) Greenwich Mean Time(Etc/GMT)&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;throwExceptionOnExpiry&lt;/cell&gt;&lt;cell&gt;true&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;second&lt;/cell&gt;&lt;cell&gt;0&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;minute&lt;/cell&gt;&lt;cell&gt;0/5&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;hour&lt;/cell&gt;&lt;cell&gt;*&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;day_of_month&lt;/cell&gt;&lt;cell&gt;?&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;month&lt;/cell&gt;&lt;cell&gt;*&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;dayOfWeek&lt;/cell&gt;&lt;cell&gt;*&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;year&lt;/cell&gt;&lt;cell&gt;*&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;startAt&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;endAt&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;attributeBehaviour&lt;/cell&gt;&lt;cell&gt;isThrowExceptionOnExpiryVisible,isScheduleAdvancedVisible,isScheduleAdvancedStartEndVisible,isScheduleSimpleVisible&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;triggerType&lt;/cell&gt;&lt;cell&gt;cron&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;noOfSchedules&lt;/cell&gt;&lt;cell&gt;1&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;schedule1&lt;/cell&gt;&lt;cell&gt;simple.repeat=NONE&amp;amp;trigger.timeZone=Etc/GMT&lt;/cell&gt;&lt;/row&gt;</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>componentVersion</key>
+                        <value>1.4</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>cmdVariantUri</key>
+                        <value>ctype::FlowstepVariant/cname::intermediatetimer/version::1.4.0</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>activityType</key>
+                        <value>StartTimerEvent</value>
+                    </ifl:property>
+                </bpmn2:extensionElements>
+            </bpmn2:timerEventDefinition>
+        </bpmn2:startEvent>
+        <bpmn2:callActivity id="CallActivity_7" name="Message Mapping 1">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>mappinguri</key>
+                    <value>dir://mmap/src/main/resources/mapping/mmap.mmap</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>mappingname</key>
+                    <value>mmap</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>mappingSourceValue</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>mappingType</key>
+                    <value>MessageMapping</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>mappingReference</key>
+                    <value>static</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>mappingpath</key>
+                    <value>src/main/resources/mapping/mmap</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.3</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>activityType</key>
+                    <value>Mapping</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::MessageMapping/version::1.3.1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>messageMappingBundleId</key>
+                    <value/>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+            <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+        </bpmn2:callActivity>
+        <bpmn2:sequenceFlow id="SequenceFlow_5" sourceRef="CallActivity_4" targetRef="CallActivity_7"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_13" sourceRef="StartEvent_12" targetRef="CallActivity_4"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_8" sourceRef="CallActivity_7" targetRef="EndEvent_2"/>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_1" id="BPMNPlane_1">
+            <bpmndi:BPMNShape bpmnElement="EndEvent_2" id="BPMNShape_EndEvent_2">
+                <dc:Bounds height="32.0" width="32.0" x="703.0" y="142.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartEvent_12" id="BPMNShape_StartEvent_12">
+                <dc:Bounds height="32.0" width="32.0" x="281.0" y="142.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="CallActivity_7" id="BPMNShape_CallActivity_7">
+                <dc:Bounds height="60.0" width="100.0" x="516.0" y="128.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_2" id="BPMNShape_Participant_2">
+                <dc:Bounds height="140.0" width="100.0" x="900.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="CallActivity_4" id="BPMNShape_CallActivity_4">
+                <dc:Bounds height="60.0" width="100.0" x="375.0" y="128.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_1" id="BPMNShape_Participant_1">
+                <dc:Bounds height="140.0" width="100.0" x="40.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_Process_1" id="BPMNShape_Participant_Process_1">
+                <dc:Bounds height="220.0" width="576.0" x="243.0" y="60.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_5" id="BPMNEdge_SequenceFlow_5" sourceElement="BPMNShape_CallActivity_4" targetElement="BPMNShape_CallActivity_7">
+                <di:waypoint x="425.0" xsi:type="dc:Point" y="158.0"/>
+                <di:waypoint x="566.0" xsi:type="dc:Point" y="158.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_8" id="BPMNEdge_SequenceFlow_8" sourceElement="BPMNShape_CallActivity_7" targetElement="BPMNShape_EndEvent_2">
+                <di:waypoint x="566.0" xsi:type="dc:Point" y="158.0"/>
+                <di:waypoint x="719.0" xsi:type="dc:Point" y="158.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_13" id="BPMNEdge_SequenceFlow_13" sourceElement="BPMNShape_StartEvent_12" targetElement="BPMNShape_CallActivity_4">
+                <di:waypoint x="297.0" xsi:type="dc:Point" y="158.0"/>
+                <di:waypoint x="425.0" xsi:type="dc:Point" y="158.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
