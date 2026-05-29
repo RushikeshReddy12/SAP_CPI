@@ -14,17 +14,32 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install FlashPipe CLI
-        run: npm install -g @flashpipe/cli
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-      - name: Sync from Tenant to GitHub
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Export iFlows from CPI
+        env:
+          CPI_USER: ${{ secrets.DEV_USER_ID }}
+          CPI_PASSWORD: ${{ secrets.DEV_PASSWORD }}
+          CPI_HOST: '454bb488trial.integrationsuite-trial01.cfapps.us10-001.hana.ondemand.com'
+          PACKAGE_ID: ${{ github.event.inputs.packageId }}
+        run: python export-iflows.py
+
+      - name: Configure Git
         run: |
-          flashpipe sync \
-            --tenant-host "${{ secrets.TMN_HOST }}" \
-            --oauth-host "${{ secrets.OAUTH_HOST }}" \
-            --user "${{ secrets.DEV_USER_ID }}" \
-            --password "${{ secrets.DEV_PASSWORD }}" \
-            --package-id "${{ github.event.inputs.packageId }}" \
-            --dir-artifacts-relative "packages/${{ github.event.inputs.packageId }}" \
-            --git-token "${{ secrets.GITHUB_TOKEN }}"
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Commit and Push to GitHub
+        run: |
+          git add -A
+          git diff --staged --quiet || git commit -m "Sync iFlows from CPI: ${{ github.event.inputs.packageId }} [skip ci]"
+          git push
