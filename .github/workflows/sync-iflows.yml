@@ -1,0 +1,38 @@
+name: Sync IFlows from CPI to GitHub
+
+on:
+  workflow_dispatch:
+    inputs:
+      packageId:
+        description: 'CPI Integration Package ID'
+        required: true
+        type: string
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Sync from Tenant to GitHub
+        uses: engswee/flashpipe-action/sync@v2
+        with:
+          # CPI Tenant Host (without https://)
+          tmn-host: '454bb488trial.integrationsuite-trial01.cfapps.us10-001.hana.ondemand.com'
+          
+          # OAuth Host (required even with Basic Auth)
+          oauth-host: 'authentication.eu10.hana.ondemand.com'
+          
+          # Use Basic Authentication with secrets
+          user: ${{ secrets.DEV_USER_ID }}
+          password: ${{ secrets.DEV_PASSWORD }}
+          
+          # Integration Package ID (from workflow input)
+          package-id: ${{ github.event.inputs.packageId }}
+          
+          # Directory where artifacts will be stored
+          dir-artifacts-relative: 'packages/${{ github.event.inputs.packageId }}'
+          
+          # GitHub token for committing changes
+          gitToken: ${{ secrets.GITHUB_TOKEN }}
