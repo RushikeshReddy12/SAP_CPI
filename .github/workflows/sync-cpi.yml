@@ -1,50 +1,64 @@
-name: Sync All CPI iFlows to GitHub
+name: Sync All SAP CPI iFlows
 
 on:
-  workflow_dispatch:
-
-  schedule:
-    - cron: '0 */6 * * *'   # Every 6 hours
+workflow_dispatch:
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  sync_iflows:
-    runs-on: ubuntu-latest
+sync:
+runs-on: ubuntu-latest
 
-    container:
-      image: engswee/flashpipe:latest
+```
+container:
+  image: engswee/flashpipe:latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
 
-      - name: Sync all iFlows from SAP CPI
-        uses: engswee/flashpipe-action/sync@v1
-        with:
-          tmn-host: ${{ secrets.TMN_HOST }}
-          oauth-host: ${{ secrets.OAUTH_HOST }}
-          oauth-clientid: ${{ secrets.CLIENT_ID }}
-          oauth-clientsecret: ${{ secrets.CLIENT_SECRET }}
+  - name: Get all package IDs
+    id: packages
+    run: |
+      TOKEN=$(curl -s --request POST \
+        --url "https://${{ secrets.OAUTH_HOST }}/oauth/token?grant_type=client_credentials" \
+        --user "${{ secrets.CLIENT_ID }}:${{ secrets.CLIENT_SECRET }}" \
+        | jq -r .access_token)
 
-          # Fetch ALL packages and iFlows
-          package-id: '*'
+      curl -s \
+        --url "https://${{ secrets.TMN_HOST }}/api/v1/IntegrationPackages" \
+        --header "Authorization: Bearer $TOKEN" \
+        | jq -r '.d.results[].Id' > packages.txt
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      cat packages.txt
 
-          git add -A
+  - name: Sync all packages
+    run: |
+      while read package; do
+        echo "Syncing package: $package"
 
-          if git diff --cached --quiet; then
-            echo "No changes detected"
-            exit 0
-          fi
+        flashpipe sync \
+          --tmn-host "${{ secrets.TMN_HOST }}" \
+          --oauth-host "${{ secrets.OAUTH_HOST }}" \
+          --oauth-clientid "${{ secrets.CLIENT_ID }}" \
+          --oauth-clientsecret "${{ secrets.CLIENT_SECRET }}" \
+          --package-id "$package"
+      done < packages.txt
 
-          git commit -m "Sync all CPI iFlows"
+  - name: Commit and push
+    run: |
+      git config --global user.name "github-actions[bot]"
+      git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git push
+      git add -A
+
+      if git diff --cached --quiet; then
+        echo "No changes detected"
+        exit 0
+      fi
+
+      git commit -m "Sync all SAP CPI iFlows"
+
+      git push
+```
