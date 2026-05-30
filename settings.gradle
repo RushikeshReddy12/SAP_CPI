@@ -1,0 +1,62 @@
+// If you already have your settings.gradle, please insert this configuration to the appropriate places.
+
+include "common"
+project (":common").projectDir = file("common")
+
+include "TestPackage"
+project (":TestPackage").projectDir = file("TestPackage")
+
+include "TestPackage:iflow-TestMapping"
+project (":TestPackage:iflow-TestMapping").projectDir = file("TestPackage/IntegrationFlow/TestMapping")
+
+include "TestPackage:iflow-TestMulticast"
+project (":TestPackage:iflow-TestMulticast").projectDir = file("TestPackage/IntegrationFlow/TestMulticast")
+
+include "TestPackage:iflow-TestJoinGather"
+project (":TestPackage:iflow-TestJoinGather").projectDir = file("TestPackage/IntegrationFlow/TestJoinGather")
+
+include "TestPackage:iflow-TestSubExceptionProcess"
+project (":TestPackage:iflow-TestSubExceptionProcess").projectDir = file("TestPackage/IntegrationFlow/TestSubExceptionProcess")
+
+include "TestPackage:iflow-Test"
+project (":TestPackage:iflow-Test").projectDir = file("TestPackage/IntegrationFlow/Test")
+
+include "TestPackage:iflow-TestSplitter"
+project (":TestPackage:iflow-TestSplitter").projectDir = file("TestPackage/IntegrationFlow/TestSplitter")
+
+include "TestPackage:iflow-GitHubTask"
+project (":TestPackage:iflow-GitHubTask").projectDir = file("TestPackage/IntegrationFlow/GitHubTask")
+
+include "TestPackage:iflow-TestEvents"
+project (":TestPackage:iflow-TestEvents").projectDir = file("TestPackage/IntegrationFlow/TestEvents")
+
+include "TestPackage:sc-TestScriptCollection"
+project (":TestPackage:sc-TestScriptCollection").projectDir = file("TestPackage/ScriptCollection/TestScriptCollection")
+
+include "TestPackage:iflow-TestContentModifier"
+project (":TestPackage:iflow-TestContentModifier").projectDir = file("TestPackage/IntegrationFlow/TestContentModifier")
+
+include "TestPackage:iflow-TestAggregator"
+project (":TestPackage:iflow-TestAggregator").projectDir = file("TestPackage/IntegrationFlow/TestAggregator")
+
+include "TestPackage:iflow-TestLocalIntegrationProcess"
+project (":TestPackage:iflow-TestLocalIntegrationProcess").projectDir = file("TestPackage/IntegrationFlow/TestLocalIntegrationProcess")
+
+include "TestPackage:iflow-TestConvertors"
+project (":TestPackage:iflow-TestConvertors").projectDir = file("TestPackage/IntegrationFlow/TestConvertors")
+
+include "TestPackage:iflow-TestMulticasting"
+project (":TestPackage:iflow-TestMulticasting").projectDir = file("TestPackage/IntegrationFlow/TestMulticasting")
+
+include "TestPackage:iflow-Temporary"
+project (":TestPackage:iflow-Temporary").projectDir = file("TestPackage/IntegrationFlow/Temporary")
+
+include "TestPackage:iflow-TestXMLModifier"
+project (":TestPackage:iflow-TestXMLModifier").projectDir = file("TestPackage/IntegrationFlow/TestXMLModifier")
+
+include "TestPackage:iflow-TestMessageMapping"
+project (":TestPackage:iflow-TestMessageMapping").projectDir = file("TestPackage/IntegrationFlow/TestMessageMapping")
+
+include "TestGitHub"
+project (":TestGitHub").projectDir = file("TestGitHub")
+
