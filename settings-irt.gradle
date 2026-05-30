@@ -57,3 +57,6 @@ project (":TestPackage:iflow-TestXMLModifier").projectDir = file("TestPackage/In
 include "TestPackage:iflow-TestMessageMapping"
 project (":TestPackage:iflow-TestMessageMapping").projectDir = file("TestPackage/IntegrationFlow/TestMessageMapping")
 
+include "TestGitHub"
+project (":TestGitHub").projectDir = file("TestGitHub")
+
