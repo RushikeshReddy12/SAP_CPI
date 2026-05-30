@@ -62,3 +62,6 @@ project (":TestGitHub").projectDir = file("TestGitHub")
 
 
 
+include "TestPackage:iflow-TestGithubToCPI"
+project (":TestPackage:iflow-TestGithubToCPI").projectDir = file("TestPackage/IntegrationFlow/TestGithubToCPI")
+
