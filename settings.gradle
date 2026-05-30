@@ -60,3 +60,9 @@ project (":TestPackage:iflow-TestMessageMapping").projectDir = file("TestPackage
 include "TestGitHub"
 project (":TestGitHub").projectDir = file("TestGitHub")
 
+include "sampleqaTestPackage"
+project (":sampleqaTestPackage").projectDir = file("sampleqaTestPackage")
+
+include "sampleqaTestPackage:iflow-sampleqa_Test"
+project (":sampleqaTestPackage:iflow-sampleqa_Test").projectDir = file("sampleqaTestPackage/IntegrationFlow/sampleqa_Test")
+
